@@ -1,0 +1,20 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - aws cloudformation package
+        --s3-prefix ${CODEBUILD_RESOLVED_SOURCE_VERSION}
+        --template-file template.yaml
+        --s3-bucket ${deploymentbucket}
+        --output-template-file SAM-template.yaml
+        --region us-east-1
+      - aws s3 cp
+        SAM-template.yaml
+        s3://${deploymentbucket}/${CODEBUILD_RESOLVED_SOURCE_VERSION}/
+        --region us-east-1
+      
+artifacts:
+  type: zip
+  files:
+    - SAM-template.yaml
