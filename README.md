@@ -9,7 +9,7 @@ This is a sample implementation for the concepts described in the AWS blog post 
 
 This application is available in the AWS Serverless Application Repository. You can deploy it to your account from there:
 
-[![cloudformation-launch-button](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/lambda/home?#/create/app?applicationId=arn:aws:serverlessrepo:us-east-1:387304072572:applications/amazon-cloudfront-access-logs-queries)
+[![cloudformation-launch-button](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://serverlessrepo.aws.amazon.com/#/applications/arn:aws:serverlessrepo:us-east-1:387304072572:applications~amazon-cloudfront-access-logs-queries)
 
 ## Overview
 
