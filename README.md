@@ -1,6 +1,6 @@
 # Analyzing your Amazon CloudFront access logs at scale
 
-This is a sample implementation for the concepts described in the AWS blog post "Analyzing your Amazon CloudFront access logs at scale" using
+This is a sample implementation for the concepts described in the AWS blog post [_Analyze your Amazon CloudFront access logs at scale_](https://aws.amazon.com/blogs/big-data/analyze-your-amazon-cloudfront-access-logs-at-scale/) using
 [AWS CloudFormation](https://aws.amazon.com/cloudformation/),
 [Amazon Athena](https://aws.amazon.com/athena/),
 [AWS Glue](https://aws.amazon.com/glue/),
