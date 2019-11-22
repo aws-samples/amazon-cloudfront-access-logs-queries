@@ -19,7 +19,7 @@ The application has two main parts:
 
     ![infrastructure-overview](images/moveAccessLogs.png)
 
-- An hourly scheduled AWS Lambda function `transformPartition` that runs a [Create Table As Select](https://docs.aws.amazon.com/athena/latest/ug/ctas.html) (CTAS) query on a single partition per run, taking one hour of data into account. It writes the content of the partition to the Apache Parquet format into the `<StackName>-cf-access-logs` S3 bucket.
+- An hourly scheduled AWS Lambda function `transformPartition` that runs an [INSERT INTO](https://docs.aws.amazon.com/athena/latest/ug/insert-into.html) query on a single partition per run, taking one hour of data into account. It writes the content of the partition to the Apache Parquet format into the `<StackName>-cf-access-logs` S3 bucket.
 
     ![infrastructure-overview](images/transformPartition.png)
 

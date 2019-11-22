@@ -45,7 +45,7 @@ Resources:
         Properties:
             CodeUri: functions/
             Handler: transformPartition.handler
-            Runtime: nodejs8.10
+            Runtime: nodejs12.x
             Timeout: 900
             Policies:
             - Version: '2012-10-17'
@@ -83,7 +83,6 @@ Resources:
                     TARGET_TABLE: !Ref PartitionedParquetTable
                     DATABASE: !Ref CfLogsDatabase
                     ATHENA_QUERY_RESULTS_LOCATION: !Sub "s3://${ResourcePrefix}-${AWS::AccountId}-cf-access-logs/athena-query-results"
-                    ATHENA_CTAS_RESULTS_LOCATION: !Sub "s3://${ResourcePrefix}-${AWS::AccountId}-cf-access-logs/${ParquetKeyPrefix}"
             Events:
               HourlyEvt:
                 Type: Schedule
@@ -94,7 +93,7 @@ Resources:
         Properties:
             CodeUri: functions/
             Handler: createPartitions.handler
-            Runtime: nodejs8.10
+            Runtime: nodejs12.x
             Timeout: 5
             Policies:
             - Version: '2012-10-17'
@@ -135,7 +134,7 @@ Resources:
         Properties:
             CodeUri: functions/
             Handler: moveAccessLogs.handler
-            Runtime: nodejs8.10
+            Runtime: nodejs12.x
             Timeout: 30
             Policies:
             - Version: '2012-10-17'

@@ -7,9 +7,6 @@ const sourceTable = process.env.SOURCE_TABLE;
 const targetTable = process.env.TARGET_TABLE;
 const database = process.env.DATABASE;
 
-// s3 URL to write CTAS results to (including trailing slash)
-const athenaCtasResultsLocation = process.env.ATHENA_CTAS_RESULTS_LOCATION;
-
 // get the partition of 2hours ago
 exports.handler = async (event, context, callback) => {
   var partitionHour = new Date(Date.now() - 120 * 60 * 1000);
@@ -20,35 +17,14 @@ exports.handler = async (event, context, callback) => {
 
   console.log('Transforming Partition', { year, month, day, hour });
 
-  var intermediateTable = `ctas_${year}_${month}_${day}_${hour}`;
-
   var ctasStatement = `
-    CREATE TABLE ${database}.${intermediateTable}
-    WITH ( format='PARQUET',
-        external_location='${athenaCtasResultsLocation}year=${year}/month=${month}/day=${day}/hour=${hour}',
-        parquet_compression = 'SNAPPY')
-    AS SELECT *
+    INSERT INTO ${database}.${targetTable}
+    SELECT *
     FROM ${database}.${sourceTable}
     WHERE year = '${year}'
         AND month = '${month}'
         AND day = '${day}'
         AND hour = '${hour}';`;
 
-  var dropTableStatement = `DROP TABLE ${database}.${intermediateTable};`;
-
-  var createNewPartitionStatement = `
-    ALTER TABLE ${database}.${targetTable}
-    ADD IF NOT EXISTS 
-    PARTITION (
-        year = '${year}',
-        month = '${month}',
-        day = '${day}',
-        hour = '${hour}' );`;
-
-  await util.runQuery(ctasStatement).then(
-    () => Promise.all([
-      util.runQuery(dropTableStatement),
-      util.runQuery(createNewPartitionStatement)
-    ])
-  );
+  await util.runQuery(ctasStatement);
 }
