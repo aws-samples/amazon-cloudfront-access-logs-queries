@@ -210,7 +210,7 @@ Resources:
               Type: string
             - Name: bytes
               Type: bigint
-            - Name: requestip
+            - Name: request_ip
               Type: string
             - Name: method
               Type: string
@@ -222,38 +222,52 @@ Resources:
               Type: int
             - Name: referrer
               Type: string
-            - Name: useragent
+            - Name: user_agent
               Type: string
-            - Name: querystring
+            - Name: query_string
               Type: string
             - Name: cookie
               Type: string
-            - Name: resulttype
+            - Name: result_type
               Type: string
-            - Name: requestid
+            - Name: request_id
               Type: string
-            - Name: hostheader
+            - Name: host_header
               Type: string
-            - Name: requestprotocol
+            - Name: request_protocol
               Type: string
-            - Name: requestbytes
+            - Name: request_bytes
               Type: bigint
-            - Name: timetaken
+            - Name: time_taken
               Type: float
-            - Name: xforwardedfor
+            - Name: xforwarded_for
               Type: string
-            - Name: sslprotocol
+            - Name: ssl_protocol
               Type: string
-            - Name: sslcipher
+            - Name: ssl_cipher
               Type: string
-            - Name: responseresulttype
+            - Name: response_result_type
               Type: string
-            - Name: httpversion
+            - Name: http_version
               Type: string
-            - Name: filestatus
+            - Name: fle_status
               Type: string
-            - Name: encryptedfields
+            - Name: fle_encrypted_fields
               Type: int
+            - Name: c_port
+              Type: int
+            - Name: time_to_first_byte
+              Type: float
+            - Name: x_edge_detailed_result_type
+              Type: string
+            - Name: sc_content_type
+              Type: string
+            - Name: sc_content_len
+              Type: bigint
+            - Name: sc_range_start
+              Type: bigint
+            - Name: sc_range_end
+              Type: bigint
             InputFormat: org.apache.hadoop.mapred.TextInputFormat
             Location: !Sub "s3://${ResourcePrefix}-${AWS::AccountId}-cf-access-logs/${GzKeyPrefix}"
             SerdeInfo:
@@ -291,7 +305,7 @@ Resources:
               Type: string
             - Name: bytes
               Type: bigint
-            - Name: requestip
+            - Name: request_ip
               Type: string
             - Name: method
               Type: string
@@ -303,38 +317,52 @@ Resources:
               Type: int
             - Name: referrer
               Type: string
-            - Name: useragent
+            - Name: user_agent
               Type: string
-            - Name: querystring
+            - Name: query_string
               Type: string
             - Name: cookie
               Type: string
-            - Name: resulttype
+            - Name: result_type
               Type: string
-            - Name: requestid
+            - Name: request_id
               Type: string
-            - Name: hostheader
+            - Name: host_header
               Type: string
-            - Name: requestprotocol
+            - Name: request_protocol
               Type: string
-            - Name: requestbytes
+            - Name: request_bytes
               Type: bigint
-            - Name: timetaken
+            - Name: time_taken
               Type: float
-            - Name: xforwardedfor
+            - Name: xforwarded_for
               Type: string
-            - Name: sslprotocol
+            - Name: ssl_protocol
               Type: string
-            - Name: sslcipher
+            - Name: ssl_cipher
               Type: string
-            - Name: responseresulttype
+            - Name: response_result_type
               Type: string
-            - Name: httpversion
+            - Name: http_version
               Type: string
-            - Name: filestatus
+            - Name: fle_status
               Type: string
-            - Name: encryptedfields
+            - Name: fle_encrypted_fields
               Type: int
+            - Name: c_port
+              Type: int
+            - Name: time_to_first_byte
+              Type: float
+            - Name: x_edge_detailed_result_type
+              Type: string
+            - Name: sc_content_type
+              Type: string
+            - Name: sc_content_len
+              Type: bigint
+            - Name: sc_range_start
+              Type: bigint
+            - Name: sc_range_end
+              Type: bigint
             InputFormat: org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat
             Location: !Sub "s3://${ResourcePrefix}-${AWS::AccountId}-cf-access-logs/${ParquetKeyPrefix}"
             SerdeInfo:
@@ -360,7 +388,7 @@ Resources:
               Type: string
             - Name: bytes
               Type: bigint
-            - Name: requestip
+            - Name: request_ip
               Type: string
             - Name: method
               Type: string
@@ -372,38 +400,52 @@ Resources:
               Type: int
             - Name: referrer
               Type: string
-            - Name: useragent
+            - Name: user_agent
               Type: string
-            - Name: querystring
+            - Name: query_string
               Type: string
             - Name: cookie
               Type: string
-            - Name: resulttype
+            - Name: result_type
               Type: string
-            - Name: requestid
+            - Name: request_id
               Type: string
-            - Name: hostheader
+            - Name: host_header
               Type: string
-            - Name: requestprotocol
+            - Name: request_protocol
               Type: string
-            - Name: requestbytes
+            - Name: request_bytes
               Type: bigint
-            - Name: timetaken
+            - Name: time_taken
               Type: float
-            - Name: xforwardedfor
+            - Name: xforwarded_for
               Type: string
-            - Name: sslprotocol
+            - Name: ssl_protocol
               Type: string
-            - Name: sslcipher
+            - Name: ssl_cipher
               Type: string
-            - Name: responseresulttype
+            - Name: response_result_type
               Type: string
-            - Name: httpversion
+            - Name: http_version
               Type: string
-            - Name: filestatus
+            - Name: fle_status
               Type: string
-            - Name: encryptedfields
+            - Name: fle_encrypted_fields
               Type: int
+            - Name: c_port
+              Type: int
+            - Name: time_to_first_byte
+              Type: float
+            - Name: x_edge_detailed_result_type
+              Type: string
+            - Name: sc_content_type
+              Type: string
+            - Name: sc_content_len
+              Type: bigint
+            - Name: sc_range_start
+              Type: bigint
+            - Name: sc_range_end
+              Type: bigint
             - Name: year
               Type: string
             - Name: month
@@ -431,28 +473,35 @@ Resources:
                         {"name": "time", "type": "varchar"},
                         {"name": "location", "type": "varchar"},
                         {"name": "bytes", "type": "bigint"},
-                        {"name": "requestip", "type": "varchar"},
+                        {"name": "request_ip", "type": "varchar"},
                         {"name": "method", "type": "varchar"},
                         {"name": "host", "type": "varchar"},
                         {"name": "uri", "type": "varchar"},
                         {"name": "status", "type": "integer"},
                         {"name": "referrer", "type": "varchar"},
-                        {"name": "useragent", "type": "varchar"},
-                        {"name": "querystring", "type": "varchar"},
+                        {"name": "user_agent", "type": "varchar"},
+                        {"name": "query_string", "type": "varchar"},
                         {"name": "cookie", "type": "varchar"},
-                        {"name": "resulttype", "type": "varchar"},
-                        {"name": "requestid", "type": "varchar"},
-                        {"name": "hostheader", "type": "varchar"},
-                        {"name": "requestprotocol", "type": "varchar"},
-                        {"name": "requestbytes", "type": "bigint"},
-                        {"name": "timetaken", "type": "real"},
-                        {"name": "xforwardedfor", "type": "varchar"},
-                        {"name": "sslprotocol", "type": "varchar"},
-                        {"name": "sslcipher", "type": "varchar"},
-                        {"name": "responseresulttype", "type": "varchar"},
-                        {"name": "httpversion", "type": "varchar"},
-                        {"name": "filestatus", "type": "varchar"},
-                        {"name": "encryptedfields", "type": "integer"},
+                        {"name": "result_type", "type": "varchar"},
+                        {"name": "request_id", "type": "varchar"},
+                        {"name": "host_header", "type": "varchar"},
+                        {"name": "request_protocol", "type": "varchar"},
+                        {"name": "request_bytes", "type": "bigint"},
+                        {"name": "time_taken", "type": "real"},
+                        {"name": "xforwarded_for", "type": "varchar"},
+                        {"name": "ssl_protocol", "type": "varchar"},
+                        {"name": "ssl_cipher", "type": "varchar"},
+                        {"name": "response_result_type", "type": "varchar"},
+                        {"name": "http_version", "type": "varchar"},
+                        {"name": "fle_status", "type": "varchar"},
+                        {"name": "fle_encrypted_fields", "type": "integer"},
+                        {"name": "c_port", "type": "integer"},
+                        {"name": "time_to_first_byte", "type": "real"},
+                        {"name": "x_edge_detailed_result_type", "type": "varchar"},
+                        {"name": "sc_content_type", "type": "varchar"},
+                        {"name": "sc_content_len", "type": "bigint"},
+                        {"name": "sc_range_start", "type": "bigint"},
+                        {"name": "sc_range_end", "type": "bigint"},
                         {"name": "year", "type": "varchar"},
                         {"name": "month", "type": "varchar"},
                         {"name": "day", "type": "varchar"},
