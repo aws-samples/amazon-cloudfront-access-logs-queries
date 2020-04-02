@@ -25,10 +25,10 @@ The application has two main parts:
 
 ### Q: How can I get started?
 
-1. Create athena database and table using ![athena.ddl](./athena.ddl)
-2. Generate Cloudformation template using ![template.yaml](./template.yaml)
+1. Create athena database and table using [athena.ddl](./athena.ddl)
+2. Generate Cloudformation template using [template.yaml](./template.yaml)
 3. Deploye Cloudformation template.
-3. Add s3 even notification using ![configure_s3_event.sh](./configure_s3_event.sh)
+3. Add s3 even notification using [configure_s3_event.sh](./configure_s3_event.sh)
 
 ## License Summary
 
