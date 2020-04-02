@@ -1,0 +1,19 @@
+{
+  "LambdaFunctionConfigurations": [
+    {
+      "Id": "alb_log_movement_trigger_notification",
+      "LambdaFunctionArn": "$ARN",
+      "Events": ["s3:ObjectCreated:*"],
+      "Filter": {
+        "Key": {
+          "FilterRules": [
+            {
+              "Name": "prefix",
+              "Value": "$S3_DIR_PREFIX"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -6,12 +6,14 @@ const s3 = new aws.S3({ apiVersion: '2006-03-01' });
 // prefix to copy partitioned data to w/o leading but w/ trailing slash
 const targetKeyPrefix = process.env.TARGET_KEY_PREFIX;
 
+const shouldDelete = process.env.SHOULD_DELETE;
+
 // regex for filenames by Amazon CloudFront access logs. Groups:
 // - 1.	year
 // - 2.	month
 // - 3.	day 
 // - 4.	hour
-const datePattern = '[^\\d](\\d{4})-(\\d{2})-(\\d{2})-(\\d{2})[^\\d]';
+const datePattern = '[^\\d](\\d{4})(\\d{2})(\\d{2})T(\\d{2})(\\d{2})Z[^\\d]';
 const filenamePattern = '[^/]+$';
 
 exports.handler = async (event, context, callback) => {
@@ -24,12 +26,12 @@ exports.handler = async (event, context, callback) => {
     if (match == null) {
       console.log(`Object key ${sourceKey} does not look like an access log file, so it will not be moved.`);
     } else {
-      const [, year, month, day, hour] = match;
+      const [, year, month, day, hour, min] = match;
 
       const filenameRegex = new RegExp(filenamePattern, 'g');
       const filename = filenameRegex.exec(sourceKey)[0];
 
-      const targetKey = `${targetKeyPrefix}year=${year}/month=${month}/day=${day}/hour=${hour}/${filename}`;
+      const targetKey = `${targetKeyPrefix}/dt=${year}-${month}-${day}/hour=${hour}/${filename}`;
       console.log(`Copying ${sourceKey} to ${targetKey}.`);
 
       const copyParams = {
@@ -42,10 +44,15 @@ exports.handler = async (event, context, callback) => {
       const deleteParams = { Bucket: bucket, Key: sourceKey };
 
       return copy.then(function () {
-        console.log(`Copied. Now deleting ${sourceKey}.`);
-        const del = s3.deleteObject(deleteParams).promise();
-        console.log(`Deleted ${sourceKey}.`);
-        return del;
+        if (shouldDelete == 'true') {
+          console.log(`Copied. Now deleting ${sourceKey}.`);
+          const del = s3.deleteObject(deleteParams).promise();
+          console.log(`Deleted ${sourceKey}.`);
+          return del;
+        } else {
+          console.log(`Copied. Will not delete ${sourceKey} as delete flag is not set to true`);
+          return null;
+        }
       }, function (reason) {
         var error = new Error(`Error while copying ${sourceKey}: ${reason}`);
         callback(error);
