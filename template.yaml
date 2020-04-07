@@ -59,12 +59,12 @@ Resources:
                   Action:
                     - s3:ListBucket
                     - s3:GetBucketLocation
-                  Resource: !Sub "arn:aws:s3:::${ResourcePrefix}-${AWS::AccountId}-cf-access-logs"
+                  Resource: !Sub "arn:${AWS::Partition}:s3:::${ResourcePrefix}-${AWS::AccountId}-cf-access-logs"
                 - Effect: Allow
                   Action:
                     - s3:PutObject
                     - s3:GetObject
-                  Resource: !Sub "arn:aws:s3:::${ResourcePrefix}-${AWS::AccountId}-cf-access-logs/*"
+                  Resource: !Sub "arn:${AWS::Partition}:s3:::${ResourcePrefix}-${AWS::AccountId}-cf-access-logs/*"
                 - Effect: Allow
                   Action:
                     - glue:CreatePartition
@@ -107,11 +107,11 @@ Resources:
                   Action:
                     - s3:ListBucket
                     - s3:GetBucketLocation
-                  Resource: !Sub "arn:aws:s3:::${ResourcePrefix}-${AWS::AccountId}-cf-access-logs"
+                  Resource: !Sub "arn:${AWS::Partition}:s3:::${ResourcePrefix}-${AWS::AccountId}-cf-access-logs"
                 - Effect: Allow
                   Action:
                     - s3:PutObject
-                  Resource: !Sub "arn:aws:s3:::${ResourcePrefix}-${AWS::AccountId}-cf-access-logs/*"
+                  Resource: !Sub "arn:${AWS::Partition}:s3:::${ResourcePrefix}-${AWS::AccountId}-cf-access-logs/*"
                 - Effect: Allow
                   Action:
                     - glue:CreatePartition
@@ -143,11 +143,11 @@ Resources:
                   Action:
                     - s3:GetObject
                     - s3:DeleteObject
-                  Resource: !Sub "arn:aws:s3:::${ResourcePrefix}-${AWS::AccountId}-cf-access-logs/${NewKeyPrefix}*"
+                  Resource: !Sub "arn:${AWS::Partition}:s3:::${ResourcePrefix}-${AWS::AccountId}-cf-access-logs/${NewKeyPrefix}*"
                 - Effect: Allow
                   Action:
                     - s3:PutObject
-                  Resource: !Sub "arn:aws:s3:::${ResourcePrefix}-${AWS::AccountId}-cf-access-logs/${GzKeyPrefix}*"
+                  Resource: !Sub "arn:${AWS::Partition}:s3:::${ResourcePrefix}-${AWS::AccountId}-cf-access-logs/${GzKeyPrefix}*"
             Environment:
                 Variables:
                     TARGET_KEY_PREFIX: !Ref GzKeyPrefix
