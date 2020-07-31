@@ -13,7 +13,7 @@ Parameters:
   ResourcePrefix: 
     Type: String
     Default: 'myapp'
-    ConstraintDescription: '[a-z0-9]+/'
+    AllowedPattern: '[a-z0-9]+'
     MinLength: 1
     MaxLength: 20
     Description: >
@@ -21,21 +21,21 @@ Parameters:
   NewKeyPrefix: 
     Type: String
     Default: 'new/'
-    ConstraintDescription: '[A-Za-z0-9\-]+/'
+    AllowedPattern: '[A-Za-z0-9\-]+/'
     Description: >
         Prefix of new access log files that are written by Amazon CloudFront.
         Including the trailing slash.
   GzKeyPrefix: 
     Type: String
     Default: 'partitioned-gz/'
-    ConstraintDescription: '[A-Za-z0-9\-]+/'
+    AllowedPattern: '[A-Za-z0-9\-]+/'
     Description: >
         Prefix of gzip'ed access log files that are moved to the Apache Hive
         like style. Including the trailing slash.
   ParquetKeyPrefix: 
     Type: String
     Default: 'partitioned-parquet/'
-    ConstraintDescription: '[A-Za-z0-9\-]+/'
+    AllowedPattern: '[A-Za-z0-9\-]+/'
     Description: >
         Prefix of parquet files that are created in Apache Hive
         like style by the CTAS query. Including the trailing slash.
