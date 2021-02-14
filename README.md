@@ -88,8 +88,8 @@ If you found yourself wishing this set of frequently asked questions had an answ
 
 ### Q: How can I contribute?
 
-See the [Contributing Guidelines](https://github.com/aws-samples/amazon-cloudfront-access-logs-queries/blob/master/CONTRIBUTING.md) for details.
+See the [Contributing Guidelines](https://github.com/aws-samples/amazon-cloudfront-access-logs-queries/blob/mainline/CONTRIBUTING.md) for details.
 
 ## License Summary
 
-This sample code is made available under a modified MIT license. See the [LICENSE](https://github.com/aws-samples/amazon-cloudfront-access-logs-queries/blob/master/LICENSE) file.
+This sample code is made available under a modified MIT license. See the [LICENSE](https://github.com/aws-samples/amazon-cloudfront-access-logs-queries/blob/mainline/LICENSE) file.
