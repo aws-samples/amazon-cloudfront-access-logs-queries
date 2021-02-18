@@ -167,6 +167,31 @@ Resources:
         Description: "Bucket for Amazon CloudFront access logs"
         Properties:
             BucketName: !Sub "${ResourcePrefix}-${AWS::AccountId}-cf-access-logs"
+            BucketEncryption:
+              ServerSideEncryptionConfiguration:
+              - ServerSideEncryptionByDefault:
+                  SSEAlgorithm: AES256
+            PublicAccessBlockConfiguration:
+              BlockPublicAcls: Yes
+              BlockPublicPolicy: Yes
+              IgnorePublicAcls: Yes
+              RestrictPublicBuckets: Yes
+    CloudFrontAccessLogsBucketPolicy:
+      Type: "AWS::S3::BucketPolicy"
+      Properties:
+        Bucket: !Ref CloudFrontAccessLogsBucket
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+          - Effect: Deny
+            Principal: "*"
+            Action: s3:*
+            Resource:
+            - !Sub "${CloudFrontAccessLogsBucket.Arn}"
+            - !Sub "${CloudFrontAccessLogsBucket.Arn}/*"
+            Condition:
+              Bool:
+                "aws:SecureTransport": "false"
 
 # Glue Resources
 # - Database
