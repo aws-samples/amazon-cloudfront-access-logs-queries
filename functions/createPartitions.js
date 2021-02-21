@@ -8,7 +8,13 @@ const database = process.env.DATABASE;
 
 // creates partitions for the hour after the current hour
 exports.handler = async (event, context, callback) => {
-  var nextHour = new Date(Date.now() + 60 * 60 * 1000);
+
+  // format of dth is '2021-01-01T00'
+  var input = 'dth' in event ? `${event.dth}:00:00Z` : Date.now() + 60 * 60 * 1000;
+  var nextHour = new Date(input);
+  if (isNaN(nextHour))
+    throw new Error('invalid dth')
+
   var year = nextHour.getUTCFullYear();
   var month = (nextHour.getUTCMonth() + 1).toString().padStart(2, '0');
   var day = nextHour.getUTCDate().toString().padStart(2, '0');
