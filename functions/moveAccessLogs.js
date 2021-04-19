@@ -47,7 +47,7 @@ exports.handler = async (event, context, callback) => {
         console.log(`Deleted ${sourceKey}.`);
         return del;
       }, function (reason) {
-        var error = new Error(`Error while copying ${sourceKey}: ${reason}`);
+        const error = new Error(`Error while copying ${sourceKey}: ${reason}`);
         callback(error);
       });
 
