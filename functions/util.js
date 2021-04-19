@@ -7,27 +7,27 @@ const athena = new aws.Athena({ apiVersion: '2017-05-18' });
 const athenaQueryResultsLocation = process.env.ATHENA_QUERY_RESULTS_LOCATION;
 
 async function waitForQueryExecution(queryExecutionId) {
-    while (true) {
-        var data = await athena.getQueryExecution({
-            QueryExecutionId: queryExecutionId
-        }).promise();
-        const state = data.QueryExecution.Status.State;
-        if (state === 'SUCCEEDED') {
-            return;
-        } else if (state === 'FAILED' || state === 'CANCELLED') {
-            throw Error(`Query ${queryExecutionId} failed: ${data.QueryExecution.Status.StateChangeReason}`);
-        }
-        await new Promise(resolve => setTimeout(resolve, 100));
+  while (true) {
+    const data = await athena.getQueryExecution({
+      QueryExecutionId: queryExecutionId
+    }).promise();
+    const state = data.QueryExecution.Status.State;
+    if (state === 'SUCCEEDED') {
+      return;
+    } else if (state === 'FAILED' || state === 'CANCELLED') {
+      throw Error(`Query ${queryExecutionId} failed: ${data.QueryExecution.Status.StateChangeReason}`);
     }
+    await new Promise(resolve => setTimeout(resolve, 100));
+  }
 }
 
 exports.runQuery = async (query) => {
-    var params = {
-        QueryString: query,
-        ResultConfiguration: {
-            OutputLocation: athenaQueryResultsLocation
-        }
-    };
-    return athena.startQueryExecution(params).promise()
-        .then(data => waitForQueryExecution(data.QueryExecutionId));
+  const params = {
+    QueryString: query,
+    ResultConfiguration: {
+      OutputLocation: athenaQueryResultsLocation
+    }
+  };
+  return athena.startQueryExecution(params).promise()
+    .then(data => waitForQueryExecution(data.QueryExecutionId));
 }
