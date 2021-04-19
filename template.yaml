@@ -45,7 +45,7 @@ Resources:
         Properties:
             CodeUri: functions/
             Handler: transformPartition.handler
-            Runtime: nodejs12.x
+            Runtime: nodejs14.x
             Timeout: 900
             Policies:
             - Version: '2012-10-17'
@@ -93,7 +93,7 @@ Resources:
         Properties:
             CodeUri: functions/
             Handler: createPartitions.handler
-            Runtime: nodejs12.x
+            Runtime: nodejs14.x
             Timeout: 5
             Policies:
             - Version: '2012-10-17'
@@ -134,7 +134,7 @@ Resources:
         Properties:
             CodeUri: functions/
             Handler: moveAccessLogs.handler
-            Runtime: nodejs12.x
+            Runtime: nodejs14.x
             Timeout: 30
             Policies:
             - Version: '2012-10-17'
@@ -162,7 +162,7 @@ Resources:
                                 Rules:
                                 - Name: prefix
                                   Value: !Ref NewKeyPrefix
-    CloudFrontAccessLogsBucket :
+    CloudFrontAccessLogsBucket:
         Type: "AWS::S3::Bucket"
         Description: "Bucket for Amazon CloudFront access logs"
         Properties:

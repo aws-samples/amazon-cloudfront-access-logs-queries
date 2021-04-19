@@ -9,15 +9,15 @@ const database = process.env.DATABASE;
 
 // get the partition of 2hours ago
 exports.handler = async (event, context, callback) => {
-  var partitionHour = new Date(Date.now() - 120 * 60 * 1000);
-  var year = partitionHour.getUTCFullYear();
-  var month = (partitionHour.getUTCMonth() + 1).toString().padStart(2, '0');
-  var day = partitionHour.getUTCDate().toString().padStart(2, '0');
-  var hour = partitionHour.getUTCHours().toString().padStart(2, '0');
+  const partitionHour = new Date(Date.now() - 120 * 60 * 1000);
+  const year = partitionHour.getUTCFullYear();
+  const month = (partitionHour.getUTCMonth() + 1).toString().padStart(2, '0');
+  const day = partitionHour.getUTCDate().toString().padStart(2, '0');
+  const hour = partitionHour.getUTCHours().toString().padStart(2, '0');
 
   console.log('Transforming Partition', { year, month, day, hour });
 
-  var ctasStatement = `
+  const ctasStatement = `
     INSERT INTO ${database}.${targetTable}
     SELECT *
     FROM ${database}.${sourceTable}
