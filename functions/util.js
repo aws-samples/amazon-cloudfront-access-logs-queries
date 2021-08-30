@@ -1,7 +1,7 @@
 // Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
 const aws = require('aws-sdk');
-const athena = new aws.Athena({ apiVersion: '2017-05-181' });
+const athena = new aws.Athena({ apiVersion: '2017-05-18' });
 
 // s3 URL of the query results (without trailing slash)
 const athenaQueryResultsLocation = process.env.ATHENA_QUERY_RESULTS_LOCATION;
