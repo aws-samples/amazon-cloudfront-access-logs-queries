@@ -40,6 +40,55 @@ Parameters:
         Prefix of parquet files that are created in Apache Hive
         like style by the CTAS query. Including the trailing slash.
 Resources:
+    TransformMissingGzDataDailyFn:
+        Type: AWS::Serverless::Function
+        Properties:
+            CodeUri: functions/
+            Handler: transformMissingGzDataDaily.handler
+            Runtime: nodejs12.x
+            Timeout: 900
+            Policies:
+            - Version: '2012-10-17'
+              Statement:
+                - Effect: Allow
+                  Action:
+                    - athena:StartQueryExecution
+                    - athena:GetQueryExecution
+                  Resource: '*'
+                - Effect: Allow
+                  Action:
+                    - s3:ListBucket
+                    - s3:GetBucketLocation
+                  Resource: !Sub "arn:${AWS::Partition}:s3:::${ResourcePrefix}-${AWS::AccountId}-cf-access-logs"
+                - Effect: Allow
+                  Action:
+                    - s3:PutObject
+                    - s3:GetObject
+                  Resource: !Sub "arn:${AWS::Partition}:s3:::${ResourcePrefix}-${AWS::AccountId}-cf-access-logs/*"
+                - Effect: Allow
+                  Action:
+                    - glue:CreatePartition
+                    - glue:GetDatabase
+                    - glue:GetTable
+                    - glue:BatchCreatePartition
+                    - glue:GetPartition
+                    - glue:GetPartitions
+                    - glue:CreateTable
+                    - glue:DeleteTable
+                    - glue:DeletePartition
+                  Resource: '*'
+            Environment:
+                Variables:
+                    SOURCE_TABLE: !Ref PartitionedGzTable
+                    TARGET_TABLE: !Ref PartitionedParquetTable
+                    DATABASE: !Ref CfLogsDatabase
+                    ATHENA_QUERY_RESULTS_LOCATION: !Sub "s3://${ResourcePrefix}-${AWS::AccountId}-cf-access-logs/athena-query-results"
+            Events:
+              HourlyEvt:
+                Type: Schedule
+                Properties:
+                  Schedule: cron(10 6 * * ? *)
+
     TransformPartFn:
         Type: AWS::Serverless::Function
         Properties:
