@@ -167,6 +167,12 @@ Resources:
         Description: "Bucket for Amazon CloudFront access logs"
         Properties:
             BucketName: !Sub "${ResourcePrefix}-${AWS::AccountId}-cf-access-logs"
+            LifecycleConfiguration:
+              Rules:
+                - Id: ExpireAthenaQueryResults
+                  Prefix: athena-query-results/
+                  Status: Enabled
+                  ExpirationInDays: 1
             BucketEncryption:
               ServerSideEncryptionConfiguration:
               - ServerSideEncryptionByDefault:
