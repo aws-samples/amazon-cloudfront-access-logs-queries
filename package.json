@@ -1,0 +1,10 @@
+{
+  "name": "amazon-cloudfront-access-logs-queries",
+  "version": "1.1.0",
+  "description": "This is a sample implementation for the concepts described in the AWS blog post \"Analyzing your Amazon CloudFront access logs at scale\".",
+  "author": {
+    "name": "Steffen Grunwald"
+  },
+  "license": "MIT-0",
+  "homepage": "https://github.com/aws-samples/amazon-cloudfront-access-logs-queries"
+}

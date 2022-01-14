@@ -1,2 +1,4 @@
 packaged.yaml
 .DS_Store
+samconfig.toml
+packaged*.yaml
