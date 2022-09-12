@@ -15,11 +15,11 @@ This application is available in the AWS Serverless Application Repository. You 
 
 The application has two main parts:
 
-- An S3 bucket `<StackName>-cf-access-logs` that serves as a log bucket for Amazon CloudFront access logs. As soon as Amazon CloudFront delivers a new access logs file, an event triggers the AWS Lambda function `moveAccessLogs`. This moves the file to an [Apache Hive style](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-AlterPartition) prefix.
+- An S3 bucket `<ResourcePrefix>-<AccountId>-cf-access-logs` that serves as a log bucket for Amazon CloudFront access logs. As soon as Amazon CloudFront delivers a new access logs file, an event triggers the AWS Lambda function `moveAccessLogs`. This moves the file to an [Apache Hive style](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-AlterPartition) prefix.
 
     ![infrastructure-overview](images/moveAccessLogs.png)
 
-- An hourly scheduled AWS Lambda function `transformPartition` that runs an [INSERT INTO](https://docs.aws.amazon.com/athena/latest/ug/insert-into.html) query on a single partition per run, taking one hour of data into account. It writes the content of the partition to the Apache Parquet format into the `<StackName>-cf-access-logs` S3 bucket.
+- An hourly scheduled AWS Lambda function `transformPartition` that runs an [INSERT INTO](https://docs.aws.amazon.com/athena/latest/ug/insert-into.html) query on a single partition per run, taking one hour of data into account. It writes the content of the partition to the Apache Parquet format into the `<ResourcePrefix>-<AccountId>-cf-access-logs` S3 bucket.
 
     ![infrastructure-overview](images/transformPartition.png)
 
