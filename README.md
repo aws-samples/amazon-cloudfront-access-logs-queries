@@ -76,7 +76,7 @@ SELECT * FROM cf_access_logs.combined limit 10;
 
 ### Q: How can I use the sample application for multiple Amazon CloudFront distributions?
 
-Deploy another AWS CloudFormation stack from the same template to create a new bucket for different distributions or environments. The stack name is added to all resource names (e.g. AWS Lambda functions, S3 bucket etc.) so you can distinguish the different stacks in the AWS Management Console.
+If your data does not need to be partitioned by Amazon CloudFront distribution, you can use the same bucket and path (`new/`) for more than one distribution. Then you can query the data by `host` column. If you need to speed up the parquet transformation duration (must stay under 15 minutes) or query duration, deploy another AWS CloudFormation stack from the same template for each distribution. The stack name is added to all resource names (e.g. AWS Lambda functions, S3 bucket etc.) so you can distinguish the different stacks in the AWS Management Console.
 
 ### Q: In which region can I deploy the sample application?
 
