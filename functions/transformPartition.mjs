@@ -1,6 +1,6 @@
-// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// Copyright 2023 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
-const util = require('./util');
+import { runQuery } from './util.mjs'
 
 // AWS Glue Data Catalog database and tables
 const sourceTable = process.env.SOURCE_TABLE;
@@ -8,7 +8,7 @@ const targetTable = process.env.TARGET_TABLE;
 const database = process.env.DATABASE;
 
 // get the partition of 2hours ago
-exports.handler = async (event, context, callback) => {
+export const handler = async () => {
   const partitionHour = new Date(Date.now() - 120 * 60 * 1000);
   const year = partitionHour.getUTCFullYear();
   const month = (partitionHour.getUTCMonth() + 1).toString().padStart(2, '0');
@@ -26,5 +26,5 @@ exports.handler = async (event, context, callback) => {
         AND day = '${day}'
         AND hour = '${hour}';`;
 
-  await util.runQuery(ctasStatement);
+  await runQuery(ctasStatement);
 }

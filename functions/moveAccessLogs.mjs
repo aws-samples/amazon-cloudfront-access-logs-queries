@@ -1,7 +1,9 @@
-// Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// Copyright 2023 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
-const aws = require('aws-sdk');
-const s3 = new aws.S3({ apiVersion: '2006-03-01' });
+import { S3Client } from "@aws-sdk/client-s3";
+import { CopyObjectCommand } from '@aws-sdk/client-s3';
+import { DeleteObjectCommand } from '@aws-sdk/client-s3';
+const s3 = new S3Client();
 
 // prefix to copy partitioned data to w/o leading but w/ trailing slash
 const targetKeyPrefix = process.env.TARGET_KEY_PREFIX;
@@ -14,7 +16,7 @@ const targetKeyPrefix = process.env.TARGET_KEY_PREFIX;
 const datePattern = '[^\\d](\\d{4})-(\\d{2})-(\\d{2})-(\\d{2})[^\\d]';
 const filenamePattern = '[^/]+$';
 
-exports.handler = async (event, context, callback) => {
+export const handler = async (event, _, callback) => {
   const moves = event.Records.map(record => {
     const bucket = record.s3.bucket.name;
     const sourceKey = record.s3.object.key;
@@ -37,13 +39,13 @@ exports.handler = async (event, context, callback) => {
         Bucket: bucket,
         Key: targetKey
       };
-      const copy = s3.copyObject(copyParams).promise();
+      const copy = s3.send(new CopyObjectCommand(copyParams));
 
       const deleteParams = { Bucket: bucket, Key: sourceKey };
 
       return copy.then(function () {
         console.log(`Copied. Now deleting ${sourceKey}.`);
-        const del = s3.deleteObject(deleteParams).promise();
+        const del = s3.send(new DeleteObjectCommand(deleteParams));
         console.log(`Deleted ${sourceKey}.`);
         return del;
       }, function (reason) {
