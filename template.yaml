@@ -9,6 +9,10 @@ Description: >
     This way the data is easier to consume for big data tools (as Amazon
     Athena and AWS Glue).
 
+    Read the blog post
+    https://aws.amazon.com/blogs/big-data/analyze-your-amazon-cloudfront-access-logs-at-scale/
+    for further details about this sample asset (uksb-1tupboc62).
+
 Parameters:
   ResourcePrefix: 
     Type: String
@@ -45,7 +49,7 @@ Resources:
         Properties:
             CodeUri: functions/
             Handler: transformPartition.handler
-            Runtime: nodejs18.x
+            Runtime: nodejs20.x
             Timeout: 900
             Policies:
             - Version: '2012-10-17'
@@ -93,7 +97,7 @@ Resources:
         Properties:
             CodeUri: functions/
             Handler: createPartitions.handler
-            Runtime: nodejs18.x
+            Runtime: nodejs20.x
             Timeout: 5
             Policies:
             - Version: '2012-10-17'
@@ -134,7 +138,7 @@ Resources:
         Properties:
             CodeUri: functions/
             Handler: moveAccessLogs.handler
-            Runtime: nodejs18.x
+            Runtime: nodejs20.x
             Timeout: 30
             Policies:
             - Version: '2012-10-17'

@@ -1,4 +1,4 @@
-// Copyright 2023 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// Copyright 2024 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
 import { S3Client } from "@aws-sdk/client-s3";
 import { CopyObjectCommand } from '@aws-sdk/client-s3';
