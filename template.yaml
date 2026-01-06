@@ -18,8 +18,8 @@ Parameters:
     Type: String
     Default: 'myapp'
     AllowedPattern: '[a-z0-9]+'
-    MinLength: 1
-    MaxLength: 20
+    MinLength: "1"
+    MaxLength: "20"
     Description: >
         Prefix that is used for the created resources (20 chars, a-z and 0-9 only)
   NewKeyPrefix: 
@@ -49,7 +49,7 @@ Resources:
         Properties:
             CodeUri: functions/
             Handler: transformPartition.handler
-            Runtime: nodejs20.x
+            Runtime: nodejs24.x
             Timeout: 900
             Policies:
             - Version: '2012-10-17'
@@ -97,7 +97,7 @@ Resources:
         Properties:
             CodeUri: functions/
             Handler: createPartitions.handler
-            Runtime: nodejs20.x
+            Runtime: nodejs24.x
             Timeout: 5
             Policies:
             - Version: '2012-10-17'
@@ -138,7 +138,7 @@ Resources:
         Properties:
             CodeUri: functions/
             Handler: moveAccessLogs.handler
-            Runtime: nodejs20.x
+            Runtime: nodejs24.x
             Timeout: 30
             Policies:
             - Version: '2012-10-17'
@@ -168,7 +168,6 @@ Resources:
                                   Value: !Ref NewKeyPrefix
     CloudFrontAccessLogsBucket:
         Type: "AWS::S3::Bucket"
-        Description: "Bucket for Amazon CloudFront access logs"
         Properties:
             BucketName: !Sub "${ResourcePrefix}-${AWS::AccountId}-cf-access-logs"
             LifecycleConfiguration:
@@ -182,10 +181,10 @@ Resources:
               - ServerSideEncryptionByDefault:
                   SSEAlgorithm: AES256
             PublicAccessBlockConfiguration:
-              BlockPublicAcls: Yes
-              BlockPublicPolicy: Yes
-              IgnorePublicAcls: Yes
-              RestrictPublicBuckets: Yes
+              BlockPublicAcls: true
+              BlockPublicPolicy: true
+              IgnorePublicAcls: true
+              RestrictPublicBuckets: true
     CloudFrontAccessLogsBucketPolicy:
       Type: "AWS::S3::BucketPolicy"
       Properties:
@@ -307,7 +306,7 @@ Resources:
             Location: !Sub "s3://${ResourcePrefix}-${AWS::AccountId}-cf-access-logs/${GzKeyPrefix}"
             SerdeInfo:
               Parameters:
-                field.delim": "\t"
+                field.delim: "\t"
                 serialization.format: "\t"
               SerializationLibrary: org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe
     PartitionedParquetTable:

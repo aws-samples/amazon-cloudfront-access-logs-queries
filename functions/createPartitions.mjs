@@ -1,6 +1,6 @@
-// Copyright 2024 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// Copyright 2026 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
-import { runQuery } from './util.mjs'
+import { runQuery } from './util.mjs';
 
 // AWS Glue Data Catalog database and table
 const table = process.env.TABLE;

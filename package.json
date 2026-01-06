@@ -1,7 +1,39 @@
 {
   "name": "amazon-cloudfront-access-logs-queries",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "This is a sample implementation for the concepts described in the AWS blog post \"Analyzing your Amazon CloudFront access logs at scale\".",
+  "type": "module",
+  "scripts": {
+    "test:integration": "node --experimental-vm-modules node_modules/.bin/jest",
+    "deploy:integration": "sam deploy --stack-name cf-logs-integration-test --parameter-overrides ResourcePrefix=test --resolve-s3 --capabilities CAPABILITY_IAM",
+    "destroy:integration": "aws s3 rm s3://$(aws cloudformation describe-stack-resources --stack-name cf-logs-integration-test --query 'StackResources[?LogicalResourceId==`CloudFrontAccessLogsBucket`].PhysicalResourceId' --output text) --recursive && aws cloudformation delete-stack --stack-name cf-logs-integration-test",
+    "validate": "sam validate -t template.yaml --lint",
+    "build": "sam build"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.0.0",
+    "@aws-sdk/client-athena": "^3.0.0",
+    "@aws-sdk/client-cloudformation": "^3.0.0",
+    "@aws-sdk/client-lambda": "^3.0.0",
+    "@aws-sdk/client-glue": "^3.0.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.0",
+    "typescript": "^5.0.0",
+    "@types/jest": "^29.5.0",
+    "dotenv": "^16.0.0",
+    "@types/node": "^20.0.0"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "testTimeout": 300000,
+    "testMatch": ["**/test/**/*.test.ts"],
+    "transform": {
+      "^.+\\.ts$": ["ts-jest", { "useESM": true }]
+    }
+  },
   "author": {
     "name": "Steffen Grunwald"
   },

@@ -2,3 +2,6 @@ packaged.yaml
 .DS_Store
 samconfig.toml
 packaged*.yaml
+.env
+.aws-sam
+node_modules
