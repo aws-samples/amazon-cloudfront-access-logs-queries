@@ -1,6 +1,6 @@
 {
   "name": "amazon-cloudfront-access-logs-queries",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "This is a sample implementation for the concepts described in the AWS blog post \"Analyzing your Amazon CloudFront access logs at scale\".",
   "type": "module",
   "scripts": {
