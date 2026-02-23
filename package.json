@@ -1,6 +1,6 @@
 {
   "name": "amazon-cloudfront-access-logs-queries",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "This is a sample implementation for the concepts described in the AWS blog post \"Analyzing your Amazon CloudFront access logs at scale\".",
   "type": "module",
   "scripts": {
@@ -11,27 +11,34 @@
     "build": "sam build"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.982.0",
-    "@aws-sdk/client-athena": "^3.982.0",
-    "@aws-sdk/client-cloudformation": "^3.982.0",
-    "@aws-sdk/client-lambda": "^3.982.0",
-    "@aws-sdk/client-glue": "^3.982.0"
+    "@aws-sdk/client-athena": "^3.995.0",
+    "@aws-sdk/client-cloudformation": "^3.995.0",
+    "@aws-sdk/client-glue": "^3.995.0",
+    "@aws-sdk/client-lambda": "^3.995.0",
+    "@aws-sdk/client-s3": "^3.995.0"
   },
   "devDependencies": {
-    "jest": "^29.7.0",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.10.13",
+    "dotenv": "^17.3.1",
+    "jest": "^30.2.0",
     "ts-jest": "^29.1.0",
-    "typescript": "^5.0.0",
-    "@types/jest": "^29.5.0",
-    "dotenv": "^16.0.0",
-    "@types/node": "^20.0.0"
+    "typescript": "^5.0.0"
   },
   "jest": {
     "preset": "ts-jest",
     "testEnvironment": "node",
     "testTimeout": 300000,
-    "testMatch": ["**/test/**/*.test.ts"],
+    "testMatch": [
+      "**/test/**/*.test.ts"
+    ],
     "transform": {
-      "^.+\\.ts$": ["ts-jest", { "useESM": true }]
+      "^.+\\.ts$": [
+        "ts-jest",
+        {
+          "useESM": true
+        }
+      ]
     }
   },
   "author": {
