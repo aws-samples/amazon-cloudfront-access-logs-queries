@@ -11,7 +11,9 @@
     "build": "sam build"
   },
   "overrides": {
-    "fast-xml-parser": "5.5.6"
+    "fast-xml-parser": "5.5.6",
+    "picomatch@2": "2.3.2",
+    "picomatch@4": "4.0.4"
   },
   "dependencies": {
     "@aws-sdk/client-athena": "^3.1011.0",
