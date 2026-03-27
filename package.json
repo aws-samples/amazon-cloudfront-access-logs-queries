@@ -10,17 +10,12 @@
     "validate": "sam validate -t template.yaml --lint",
     "build": "sam build"
   },
-  "overrides": {
-    "fast-xml-parser": "5.5.6",
-    "picomatch@2": "2.3.2",
-    "picomatch@4": "4.0.4"
-  },
   "dependencies": {
-    "@aws-sdk/client-athena": "^3.1011.0",
-    "@aws-sdk/client-cloudformation": "^3.1011.0",
-    "@aws-sdk/client-glue": "^3.1011.0",
-    "@aws-sdk/client-lambda": "^3.1011.0",
-    "@aws-sdk/client-s3": "^3.1011.0"
+    "@aws-sdk/client-athena": "^3.1018.0",
+    "@aws-sdk/client-cloudformation": "^3.1018.0",
+    "@aws-sdk/client-glue": "^3.1018.0",
+    "@aws-sdk/client-lambda": "^3.1018.0",
+    "@aws-sdk/client-s3": "^3.1018.0"
   },
   "devDependencies": {
     "@types/jest": "^30.0.0",
