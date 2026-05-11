@@ -11,11 +11,11 @@
     "build": "sam build"
   },
   "dependencies": {
-    "@aws-sdk/client-athena": "^3.1018.0",
-    "@aws-sdk/client-cloudformation": "^3.1018.0",
-    "@aws-sdk/client-glue": "^3.1018.0",
-    "@aws-sdk/client-lambda": "^3.1018.0",
-    "@aws-sdk/client-s3": "^3.1018.0"
+    "@aws-sdk/client-athena": "^3.1045.0",
+    "@aws-sdk/client-cloudformation": "^3.1045.0",
+    "@aws-sdk/client-glue": "^3.1045.0",
+    "@aws-sdk/client-lambda": "^3.1045.0",
+    "@aws-sdk/client-s3": "^3.1045.0"
   },
   "devDependencies": {
     "@types/jest": "^30.0.0",
