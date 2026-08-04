@@ -48,9 +48,11 @@
   "license": "MIT-0",
   "homepage": "https://github.com/aws-samples/amazon-cloudfront-access-logs-queries",
   "overrides": {
-    "js-yaml": "$js-yaml"
+    "js-yaml": "$js-yaml",
+    "babel-plugin-istanbul": "^8.0.0"
   },
   "overridesJustification": {
-    "js-yaml": "CVE-2026-53550, CVE-2026-59869 (quadratic DoS in merge-key handling). Transitive via ts-jest -> @jest/transform -> babel-plugin-istanbul -> @istanbuljs/load-nyc-config which pins js-yaml ^3.13.1. The fix requires 4.2.0+ and load-nyc-config has no newer release. Remove this override once load-nyc-config releases a version that drops or upgrades js-yaml."
+    "js-yaml": "CVE-2026-53550, CVE-2026-59869 (quadratic DoS in merge-key handling). Transitive via ts-jest -> @jest/transform -> babel-plugin-istanbul -> @istanbuljs/load-nyc-config which pins js-yaml ^3.13.1. The fix requires 4.2.0+ and load-nyc-config has no newer release. Remove this override once load-nyc-config releases a version that drops or upgrades js-yaml.",
+    "babel-plugin-istanbul": "CVE-2026-14257 (brace-expansion DoS). babel-plugin-istanbul 7.x uses test-exclude 6.x -> minimatch 3.x -> brace-expansion 1.x which has no patched release. babel-plugin-istanbul 8 uses test-exclude 7 -> minimatch 9+ -> brace-expansion 2.x+ (patched). Remove this override once @jest/transform depends on babel-plugin-istanbul ^8."
   }
 }
