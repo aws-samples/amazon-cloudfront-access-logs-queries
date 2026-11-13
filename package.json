@@ -11,20 +11,20 @@
     "build": "sam build"
   },
   "dependencies": {
-    "@aws-sdk/client-athena": "^3.1045.0",
-    "@aws-sdk/client-cloudformation": "^3.1045.0",
-    "@aws-sdk/client-glue": "^3.1045.0",
-    "@aws-sdk/client-lambda": "^3.1045.0",
-    "@aws-sdk/client-s3": "^3.1045.0"
+    "@aws-sdk/client-athena": "^3.1168.0",
+    "@aws-sdk/client-cloudformation": "^3.1168.0",
+    "@aws-sdk/client-glue": "^3.1168.0",
+    "@aws-sdk/client-lambda": "^3.1168.0",
+    "@aws-sdk/client-s3": "^3.1168.0"
   },
   "devDependencies": {
     "@types/jest": "^30.0.0",
     "@types/node": "^24.10.13",
     "dotenv": "^17.3.1",
     "jest": "^30.2.0",
+    "js-yaml": "^5.4.2",
     "ts-jest": "^29.4.15",
-    "typescript": "^5.0.0",
-    "js-yaml": "^5.4.2"
+    "typescript": "^5.0.0"
   },
   "jest": {
     "preset": "ts-jest",
